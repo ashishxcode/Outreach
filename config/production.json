@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://ashishxcode:admin@outreach.j3vhb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "jwtSecret": "mySecretToken",
+  "githubClientId": "23bbb59bc1b0ea8f5e63",
+  "githubToken": "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"
+}
