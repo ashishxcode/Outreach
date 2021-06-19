@@ -340,7 +340,6 @@ small,
   width: 360px;
   margin: 3rem auto;
   text-align: center;
-
 }
 .form .form-group {
   margin: 1.2rem 0;
@@ -710,7 +709,7 @@ input[type]:focus,
 .post-action {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .post .btn {
   font-weight: normal;
