@@ -1,4 +1,5 @@
-
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Twitter][twitter-shield]][twitter-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -6,40 +7,38 @@
   <a href="https://github.com/ashishxcode/Outreach">
     <img src="./raw/header.png" alt="Logo">
   </a>
-
-  <h1 align="center"><strong>Outreach</strong></h1>
-
+  <hr>
   <p align="center">
    A MERN Stack Social Media App for Developer Community
     <br />
     <a href="https://github.com/ashishxcode/Outreach"><strong>Explore the docs »</strong></a>
     <br />
-    <br />
-    <a href="https://theoutreach.herokuapp.com/">🔗 View Demo</a>
+    <a href="https://theoutreach.herokuapp.com/">🌎 Website </a> 
+    |
+    <a href="https://github.com/ashishxcode/Outreach">👩🏻‍💻 Code</a>
   </p>
 </p>
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
+<!-- TABLE OF CONTENTS --><details open="open">
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      About The Project
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li>Built With</li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+     Getting Started
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li>Prerequisites</li>
+        <li>Installation</li>
       </ul>
     </li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li>Contributing</li>
+    <li>License</li>
+    <li>Contact</li>
+    <li>Acknowledgements</li>
   </ol>
 </details>
 
@@ -129,7 +128,7 @@ cd client
 npm run build
 ```
 
-## Test production before deploy
+### Test production before deploy
 
 After running a build in the client 👆, cd into the root of the project.  
 And run...
@@ -177,9 +176,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 # Contact
 
-<strong>Ashish Patel</strong>: [@ashishxcode](https://twitter.com/ashishxcode) ashishxcode@gmail.com
+Your Name - [@ashishxcode](https://twitter.com/ashishxcode) - ashishxcode@gmail.com
 
-<strong>Project Link</strong>: [https://github.com/ashishxcode/Outreach](https://github.com/ashishxcode/Outreach)
+Project Link: [https://github.com/ashishxcode/Outreach](https://github.com/ashishxcode/Outreach)
 
 <!-- ACKNOWLEDGEMENTS -->
 
