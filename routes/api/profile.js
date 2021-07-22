@@ -13,7 +13,7 @@ const User = require("../../models/User");
 const Post = require("../../models/Post");
 
 // @route    GET api/profile/me
-// @desc     Get current users profile
+// @desc     Get current users profile data
 // @access   Private
 router.get("/me", auth, async (req, res) => {
   try {
@@ -99,7 +99,7 @@ router.post(
 );
 
 // @route    GET api/profile
-// @desc     Get all profiles
+// @desc     Get all users profile
 // @access   Public
 router.get("/", async (req, res) => {
   try {
@@ -258,13 +258,14 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 });
 
 // @route    GET api/profile/github/:username
-// @desc     Get user repos from Github
+// @desc     Get user repos from github username
 // @access   Public
 router.get("/github/:username", async (req, res) => {
   try {
     const uri = encodeURI(
       `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
     );
+    // githubToken is stored in default.json file 
     const headers = {
       "user-agent": "node.js",
       Authorization: `token ${config.get("githubToken")}`,

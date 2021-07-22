@@ -20,7 +20,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    // Create a new post with user id,name,avatar
     try {
+      // Getting user object except password
       const user = await User.findById(req.user.id).select("-password");
 
       const newPost = new Post({
@@ -41,7 +43,7 @@ router.post(
 );
 
 // @route    GET api/posts
-// @desc     Get all posts
+// @desc     Get all posts (time based)
 // @access   Private
 router.get("/", auth, async (req, res) => {
   try {
@@ -54,7 +56,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 // @route    GET api/posts/:id
-// @desc     Get post by ID
+// @desc     Get post by ID 
 // @access   Private
 router.get("/:id", auth, checkObjectId("id"), async (req, res) => {
   try {
@@ -99,7 +101,7 @@ router.delete("/:id", [auth, checkObjectId("id")], async (req, res) => {
 });
 
 // @route    PUT api/posts/like/:id
-// @desc     Like a post
+// @desc     Like a post and return the number of likes
 // @access   Private
 router.put("/like/:id", auth, checkObjectId("id"), async (req, res) => {
   try {
@@ -122,7 +124,7 @@ router.put("/like/:id", auth, checkObjectId("id"), async (req, res) => {
 });
 
 // @route    PUT api/posts/unlike/:id
-// @desc     Unlike a post
+// @desc     Unlike a post and return the number of likes
 // @access   Private
 router.put("/unlike/:id", auth, checkObjectId("id"), async (req, res) => {
   try {
@@ -148,7 +150,7 @@ router.put("/unlike/:id", auth, checkObjectId("id"), async (req, res) => {
 });
 
 // @route    POST api/posts/comment/:id
-// @desc     Comment on a post
+// @desc     Comment on a post 
 // @access   Private
 router.post(
   "/comment/:id",
@@ -162,9 +164,11 @@ router.post(
     }
 
     try {
+      // Getting user object except password
       const user = await User.findById(req.user.id).select("-password");
       const post = await Post.findById(req.params.id);
 
+      // Create a new comment with user id,name,avatar
       const newComment = {
         text: req.body.text,
         name: user.name,

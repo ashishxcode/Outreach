@@ -59,6 +59,7 @@ router.post(
         },
       };
 
+      // passing the user id in the payload and creating a token
       jwt.sign(
         payload,
         config.get("jwtSecret"),
