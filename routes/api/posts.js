@@ -20,7 +20,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    // Create a new post with user id,name,avatar
+    //@desc - Create a new post with user id,name,avatar
+    //@input - text,userId
+    //@output -  post{text,name,avatar,userId}
     try {
       // Getting user object except password
       const user = await User.findById(req.user.id).select("-password");
@@ -43,7 +45,7 @@ router.post(
 );
 
 // @route    GET api/posts
-// @desc     Get all posts (time based)
+// @desc     Get all posts (Based on time)
 // @access   Private
 router.get("/", auth, async (req, res) => {
   try {
@@ -59,6 +61,10 @@ router.get("/", auth, async (req, res) => {
 // @desc     Get post by ID 
 // @access   Private
 router.get("/:id", auth, checkObjectId("id"), async (req, res) => {
+  
+  //@desc - Getting the post using postId
+  //@input - postId
+  //@output -  post object
   try {
     const post = await Post.findById(req.params.id);
 
@@ -69,7 +75,6 @@ router.get("/:id", auth, checkObjectId("id"), async (req, res) => {
     res.json(post);
   } catch (err) {
     console.error(err.message);
-
     res.status(500).send("Server Error");
   }
 });
@@ -78,21 +83,27 @@ router.get("/:id", auth, checkObjectId("id"), async (req, res) => {
 // @desc     Delete a post
 // @access   Private
 router.delete("/:id", [auth, checkObjectId("id")], async (req, res) => {
+  
+  //@desc - Delete a comment using comment id
+  //@input - Post id
+  //@output - message post removed
+  
   try {
     const post = await Post.findById(req.params.id);
 
+    // Finding post using post id
     if (!post) {
       return res.status(404).json({ msg: "Post not found" });
     }
 
-    // Check user
+    // Check if user is the author of the post
     if (post.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "User not authorized" });
     }
 
     await post.remove();
-
     res.json({ msg: "Post removed" });
+
   } catch (err) {
     console.error(err.message);
 
@@ -104,14 +115,20 @@ router.delete("/:id", [auth, checkObjectId("id")], async (req, res) => {
 // @desc     Like a post and return the number of likes
 // @access   Private
 router.put("/like/:id", auth, checkObjectId("id"), async (req, res) => {
+  
+  //@desc - Like a post and add userId into post.likes array
+  //@input - userId
+  //@output - post.like array with added userId
+ 
   try {
     const post = await Post.findById(req.params.id);
 
-    // Check if the post has already been liked
+    // Checking is userId exits in post.likes array
     if (post.likes.some((like) => like.user.toString() === req.user.id)) {
       return res.status(400).json({ msg: "Post already liked" });
     }
 
+    // Adding userID into post.likes array
     post.likes.unshift({ user: req.user.id });
 
     await post.save();
@@ -127,15 +144,19 @@ router.put("/like/:id", auth, checkObjectId("id"), async (req, res) => {
 // @desc     Unlike a post and return the number of likes
 // @access   Private
 router.put("/unlike/:id", auth, checkObjectId("id"), async (req, res) => {
+  
+  //@desc - Unlike a post and remove userId from post.likes array
+  //@input - userId
+  //@output - post.like array with removed userId
   try {
     const post = await Post.findById(req.params.id);
 
-    // Check if the post has not yet been liked
+    // Checking is userId exits in post.likes array
     if (!post.likes.some((like) => like.user.toString() === req.user.id)) {
       return res.status(400).json({ msg: "Post has not yet been liked" });
     }
 
-    // remove the like
+    // Remove the userId from post.likes array
     post.likes = post.likes.filter(
       ({ user }) => user.toString() !== req.user.id
     );
@@ -163,12 +184,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    //@desc - Creating comment and adding in post.comment array
+    //@input - text for comment and userId
+    //@output - comment{text,name,avatar,userId}
     try {
       // Getting user object except password
       const user = await User.findById(req.user.id).select("-password");
       const post = await Post.findById(req.params.id);
 
-      // Create a new comment with user id,name,avatar
+
       const newComment = {
         text: req.body.text,
         name: user.name,
@@ -192,10 +216,14 @@ router.post(
 // @desc     Delete comment
 // @access   Private
 router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
+  
+  //@desc - Delete a comment using comment id
+  //@input - commnt id
+  //@output - post with deleted comment array
   try {
     const post = await Post.findById(req.params.id);
 
-    // Pull out comment
+    // Getting comment using comment id
     const comment = post.comments.find(
       (comment) => comment.id === req.params.comment_id
     );
@@ -203,7 +231,7 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     if (!comment) {
       return res.status(404).json({ msg: "Comment does not exist" });
     }
-    // Check user
+    // Make sure user is the author of the comment
     if (comment.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "User not authorized" });
     }

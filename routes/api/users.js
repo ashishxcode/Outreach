@@ -28,6 +28,9 @@ router.post(
 
     const { name, email, password } = req.body;
 
+    //@desc: Creating user using register route
+    //@input: name, email, password
+    //@output: JWT token for user (with expiry)
     try {
       // Checking if user already exists
       let user = await User.findOne({ email });
@@ -48,6 +51,7 @@ router.post(
         { forceHttps: true }
       );
 
+      // Creating user object
       user = new User({
         name,
         email,
@@ -61,6 +65,7 @@ router.post(
       // Hashing the password
       user.password = await bcrypt.hash(password, salt);
 
+      // Saving the user
       await user.save();
 
       const payload = {

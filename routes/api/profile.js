@@ -16,6 +16,10 @@ const Post = require("../../models/Post");
 // @desc     Get current users profile data
 // @access   Private
 router.get("/me", auth, async (req, res) => {
+
+  //@desc - Get current users profile data using userId
+  //@input - UserId
+  //@output -  profile object
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
@@ -138,7 +142,7 @@ router.get(
 // @access   Private
 router.delete("/", auth, async (req, res) => {
   try {
-    // Remove user posts
+    // Remove user all posts
     // Remove profile
     // Remove user
     await Promise.all([

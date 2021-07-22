@@ -45,6 +45,10 @@ router.post(
           .json({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
+      //@desc - Check if password matches
+      //@input - password(client), user.password(database)
+      //@output - boolen value 
+      
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
@@ -59,7 +63,11 @@ router.post(
         },
       };
 
-      // passing the user id in the payload and creating a token
+      
+      //@desc - Passing the user id as payload and getting jwt token
+      //@input - user id
+      //@output - jwt token
+      
       jwt.sign(
         payload,
         config.get("jwtSecret"),
