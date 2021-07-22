@@ -67,13 +67,12 @@ The main aim for building this app was to learn <strong>MERN</strong> stack
 
 This project use morden techonology for web development.
 
-- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [React](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
 <span style="font-size:30px">🚀</span>
 
@@ -176,7 +175,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 # Contact
 
-Your Name - [@ashishxcode](https://twitter.com/ashishxcode) - ashishxcode@gmail.com
+Ashish Patel - [@ashishxcode](https://twitter.com/ashishxcode) - ashishxcode@gmail.com
 
 Project Link: [https://github.com/ashishxcode/Outreach](https://github.com/ashishxcode/Outreach)
 
