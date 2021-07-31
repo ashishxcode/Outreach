@@ -19,6 +19,8 @@ app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/profile", require("./routes/api/profile"));
 app.use("/api/posts", require("./routes/api/posts"));
 
+app.use("/api/imagesUpload/", require("./routes/api/cloudinaryUpload"));
+
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {
 	// Set static folder
