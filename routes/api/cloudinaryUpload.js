@@ -9,6 +9,7 @@ const { uploadImage } = require("../../Controllers/cloudinaryController");
 
 //routes
 //image uplaod
-router.post("/imagesUpload", auth, uploadImage);
+router.post("/", auth, uploadImage);
+//http://localhost:5000/api/uploadImages
 
 module.exports = router;
