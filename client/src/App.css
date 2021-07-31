@@ -443,6 +443,23 @@ input[type]:focus,
 	top: 0;
 	opacity: 0;
 }
+
+.image-thumbnail {
+	margin: 1rem 0 0 0;
+	width: 18rem;
+	border-radius: 1rem;
+	padding: 0.5rem;
+}
+
+.ant-badge {
+	display: flex;
+}
+
+.ant-badge svg {
+	margin: 2rem -2.5rem;
+	font-size: 1.5rem;
+}
+
 .table {
 	width: 100%;
 }
