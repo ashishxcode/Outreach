@@ -9,14 +9,17 @@ cloudinary.config({
 });
 
 exports.uploadImage = async (req, res) => {
+	console.log("IGetting the response, HELLO ASHISH!!");
+
+	console.log("REQ BODY FROM IMAGE", req);
 	let result = await cloudinary.uploader.upload(req.body.image, {
 		public_id: `${Date.now()}`, // public id is visible to public whenwe retrive the data
 		resource_type: "auto", // auto : all file type : jpeg/png
 	});
 
 	//send response
-    res.json({
-        public_id = result.public_id,
-        url : result.secure_url,
-    })
+	res.json({
+		public_id: result.public_id,
+		url: result.secure_url,
+	});
 };
