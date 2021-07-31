@@ -23,3 +23,13 @@ exports.uploadImage = async (req, res) => {
 		url: result.secure_url,
 	});
 };
+
+//remove Image From cloudinary
+exports.removeImage = async (req, res) => {
+	let image_id = req.body.public_id;
+
+	cloudinary.uploader.destroy(image_id, (err, result) => {
+		if (err) return res.json({ success: false, err });
+		res.send({ ok: true });
+	});
+};
