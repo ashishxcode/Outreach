@@ -5,11 +5,14 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 
 //controllers
-const { uploadImage } = require("../../Controllers/cloudinaryController");
+const {
+	uploadImage,
+	removeImage,
+} = require("../../Controllers/cloudinaryController");
 
 //routes
 //image uplaod
 router.post("/", auth, uploadImage);
-//http://localhost:5000/api/uploadImages
 
+router.post("/removeImage", auth, removeImage);
 module.exports = router;
