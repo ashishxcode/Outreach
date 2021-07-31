@@ -5,7 +5,7 @@ import { addPost } from "../../actions/post";
 import { FiImage } from "react-icons/fi";
 import { axios } from "axios";
 import Resizer from "react-image-file-resizer";
-import api from "../utils/api";
+import api from "../../utils/api";
 
 const PostForm = ({ addPost }) => {
 	const [text, setText] = useState("");
