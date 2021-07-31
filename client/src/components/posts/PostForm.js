@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addPost } from "../../actions/post";
 import { FiImage } from "react-icons/fi";
-import { axios } from "axios";
+import axios from "axios";
 import Resizer from "react-image-file-resizer";
 import api from "../../utils/api";
 
@@ -32,7 +32,7 @@ const PostForm = ({ addPost }) => {
 						//the calback dunction : most important
 						console.log("uri ===> ", uri);
 						api
-							.post("http://localhost:8000/api/imagesUpload", {
+							.post("http://localhost:5000/api/imagesUpload/", {
 								image: uri,
 							})
 							.then((res) => {
