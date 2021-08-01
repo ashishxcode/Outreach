@@ -5,8 +5,9 @@ import { addPost } from '../../actions/post';
 import { FiImage } from 'react-icons/fi';
 import Resizer from 'react-image-file-resizer';
 import api from '../../utils/api';
+import 'antd/dist/antd.css';
 import { Badge } from 'antd';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { FiX } from 'react-icons/fi';
 
 const PostForm = ({ addPost }) => {
 	const [text, setText] = useState('');
@@ -26,9 +27,9 @@ const PostForm = ({ addPost }) => {
 			for (let i = 0; i < files.length; i++) {
 				Resizer.imageFileResizer(
 					files[i],
-					200,
-					200,
-					'JPEG',
+					300,
+					300,
+					'WEBP',
 					100,
 					0,
 					(uri) => {
@@ -38,16 +39,10 @@ const PostForm = ({ addPost }) => {
 							image: uri,
 						})
 							.then((res) => {
-								console.log(
-									'res from images ==>',
-									res.data.url,
-									// setImageURL(res.data.url)
-								);
-
 								filesUploaded.push(res.data);
 								setImages(filesUploaded);
 								console.log(
-									'filesUploaded ===> ',
+									'filesUploaded --> ',
 									filesUploaded,
 								);
 							})
@@ -80,8 +75,9 @@ const PostForm = ({ addPost }) => {
 				className="form my-1"
 				onSubmit={(e) => {
 					e.preventDefault();
-					addPost({ text });
+					addPost({ text, images });
 					setText('');
+					setImages([]);
 				}}>
 				<textarea
 					name="text"
@@ -95,26 +91,27 @@ const PostForm = ({ addPost }) => {
 				{images && images.length
 					? images.map((image) => {
 							return (
-								<Badge
-									count="❌"
-									onClick={() => {
-										handleDeleteImage(image.public_id);
-									}}
-									offset={[0, 10]}
-									style={{ cursor: 'pointer' }}
-									id={image.public_id}>
-									<img
-										src={image.url}
-										className="image-thumbnail"
-										alt=""
-									/>
-								</Badge>
+								<div className="thumbnail-container">
+									<Badge
+										count={<FiX className="badge-icon" />}
+										onClick={() => {
+											handleDeleteImage(image.public_id);
+										}}
+										style={{ cursor: 'pointer' }}
+										id={image.public_id}>
+										<img
+											src={image.url}
+											alt=""
+											className="image-thumbnail"
+										/>
+									</Badge>
+								</div>
 							);
 					  })
 					: ''}
 				<div className="form-action  my-1">
 					<div className="image-upload">
-						<label for="file-input">
+						<label htmlFor="file-input">
 							<FiImage className="upload-icon" />
 						</label>
 						<input
