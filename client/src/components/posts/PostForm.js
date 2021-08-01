@@ -61,8 +61,11 @@ const PostForm = ({ addPost }) => {
 		}
 	};
 
-	const handleDeleteImage = (e) => {
-		console.log("delete click");
+	const handleDeleteImage = (public_id) => {
+		console.log("delete click", public_id);
+		api
+			.post("http://localhost:5000/api/imagesUpload/removeImage", { public_id })
+			.then();
 	};
 	return (
 		<div className="post-form">
@@ -84,12 +87,14 @@ const PostForm = ({ addPost }) => {
 					required
 				/>
 				{images &&
-					images.length > 0 &&
+					images.length &&
 					images.map((image) => {
 						return (
 							<Badge
 								count="❌"
-								onClick={handleDeleteImage}
+								onClick={() => {
+									handleDeleteImage(image.public_id);
+								}}
 								offset={[0, 10]}
 								style={{ cursor: "pointer" }}
 								id={image.public_id}
