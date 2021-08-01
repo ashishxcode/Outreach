@@ -15,7 +15,7 @@ const PostForm = ({ addPost }) => {
 	// const [imageId, setImageId] = useState();
 
 	const handleimageResizeAndUpload = (e) => {
-		const filesUploaded = images;
+		const filesUploaded = [];
 
 		//resize: use resize react file npm : npm i react-image-file-resizer
 		//for a single file : e.target.files[0]
@@ -74,6 +74,7 @@ const PostForm = ({ addPost }) => {
 	};
 	return (
 		<div className="post-form">
+			{images.length}
 			<form
 				className="form my-1"
 				onSubmit={(e) => {
