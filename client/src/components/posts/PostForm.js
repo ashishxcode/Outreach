@@ -74,7 +74,6 @@ const PostForm = ({ addPost }) => {
 	};
 	return (
 		<div className="post-form">
-			{images.length}
 			<form
 				className="form my-1"
 				onSubmit={(e) => {
