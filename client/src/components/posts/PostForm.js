@@ -65,7 +65,12 @@ const PostForm = ({ addPost }) => {
 		console.log("delete click", public_id);
 		api
 			.post("http://localhost:5000/api/imagesUpload/removeImage", { public_id })
-			.then();
+			.then((res) => {
+				let filteredImages = images.filter((item) => {
+					return item.public_id !== public_id;
+				});
+				setImages(filteredImages);
+			});
 	};
 	return (
 		<div className="post-form">
