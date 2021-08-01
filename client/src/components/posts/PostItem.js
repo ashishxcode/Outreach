@@ -22,7 +22,7 @@ const PostItem = ({
 				className="post-header"
 				title="View Profile">
 				<img className="post-profile" src={avatar} alt="" />
-				<div class="post-user">
+				<div className="post-user">
 					<h4 className="post-username">{name}</h4>
 					<p className="post-date">Posted on {formatDate(date)}</p>
 				</div>
