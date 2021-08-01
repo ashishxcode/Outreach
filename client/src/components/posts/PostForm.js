@@ -11,7 +11,8 @@ import { AiOutlineDelete } from "react-icons/ai";
 const PostForm = ({ addPost }) => {
 	const [text, setText] = useState("");
 	const [images, setImages] = useState([]);
-	const [imageURL, setImageURL] = useState();
+	// const [imageURL, setImageURL] = useState();
+	// const [imageId, setImageId] = useState();
 
 	const handleimageResizeAndUpload = (e) => {
 		const filesUploaded = images;
@@ -40,8 +41,8 @@ const PostForm = ({ addPost }) => {
 							.then((res) => {
 								console.log(
 									"res from images ==>",
-									res.data.url,
-									setImageURL(res.data.url)
+									res.data.url
+									// setImageURL(res.data.url)
 								);
 
 								filesUploaded.push(res.data);
@@ -82,16 +83,21 @@ const PostForm = ({ addPost }) => {
 					onChange={(e) => setText(e.target.value)}
 					required
 				/>
-				{imageURL && (
-					<Badge
-						count="❌"
-						onClick={handleDeleteImage}
-						offset={[0, 10]}
-						style={{ cursor: "pointer" }}
-					>
-						<img src={imageURL} className="image-thumbnail" alt="" />
-					</Badge>
-				)}
+				{images &&
+					images.length > 0 &&
+					images.map((image) => {
+						return (
+							<Badge
+								count="❌"
+								onClick={handleDeleteImage}
+								offset={[0, 10]}
+								style={{ cursor: "pointer" }}
+								id={image.public_id}
+							>
+								<img src={image.url} className="image-thumbnail" alt="" />
+							</Badge>
+						);
+					})}
 				<div className="form-action  my-1">
 					<div className="image-upload">
 						<label for="file-input">
