@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
-import { FiImage } from 'react-icons/fi';
-import Resizer from 'react-image-file-resizer';
-import api from '../../utils/api';
-import 'antd/dist/antd.css';
-import { Badge } from 'antd';
-import { FiX } from 'react-icons/fi';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addPost } from "../../actions/post";
+import { FiImage } from "react-icons/fi";
+import Resizer from "react-image-file-resizer";
+import api from "../../utils/api";
+import "antd/dist/antd.css";
+import { Badge } from "antd";
+import { FiX } from "react-icons/fi";
+import ReactQuill from "react-quill";
+//react-quill css files
+import "react-quill/dist/quill.snow.css";
 
 const PostForm = ({ addPost }) => {
-	const [text, setText] = useState('');
+	const [text, setText] = useState("");
 	const [images, setImages] = useState([]);
 	// const [imageURL, setImageURL] = useState();
 	// const [imageId, setImageId] = useState();
@@ -29,22 +32,20 @@ const PostForm = ({ addPost }) => {
 					files[i],
 					300,
 					300,
-					'WEBP',
+					"WEBP",
 					100,
 					0,
 					(uri) => {
 						//the calback dunction : most important
-						console.log('uri ===> ', uri);
-						api.post('http://localhost:5000/api/imagesUpload/', {
-							image: uri,
-						})
+						console.log("uri ===> ", uri);
+						api
+							.post("http://localhost:5000/api/imagesUpload/", {
+								image: uri,
+							})
 							.then((res) => {
 								filesUploaded.push(res.data);
 								setImages(filesUploaded);
-								console.log(
-									'filesUploaded --> ',
-									filesUploaded,
-								);
+								console.log("filesUploaded --> ", filesUploaded);
 							})
 							.catch((err) => {
 								console.log(err.message);
@@ -52,22 +53,24 @@ const PostForm = ({ addPost }) => {
 
 						//make request to backend with images
 					},
-					'base64',
+					"base64"
 				);
 			}
 		}
 	};
 
 	const handleDeleteImage = (public_id) => {
-		console.log('delete click', public_id);
-		api.post('http://localhost:5000/api/imagesUpload/removeImage', {
-			public_id,
-		}).then((res) => {
-			let filteredImages = images.filter((item) => {
-				return item.public_id !== public_id;
+		console.log("delete click", public_id);
+		api
+			.post("http://localhost:5000/api/imagesUpload/removeImage", {
+				public_id,
+			})
+			.then((res) => {
+				let filteredImages = images.filter((item) => {
+					return item.public_id !== public_id;
+				});
+				setImages(filteredImages);
 			});
-			setImages(filteredImages);
-		});
 	};
 	return (
 		<div className="post-form">
@@ -76,18 +79,11 @@ const PostForm = ({ addPost }) => {
 				onSubmit={(e) => {
 					e.preventDefault();
 					addPost({ text, images });
-					setText('');
+					setText("");
 					setImages([]);
-				}}>
-				<textarea
-					name="text"
-					cols="30"
-					rows="5"
-					placeholder="What is in your mind?"
-					value={text}
-					onChange={(e) => setText(e.target.value)}
-					required
-				/>
+				}}
+			>
+				<ReactQuill theme="snow" value={text} onChange={setText} />
 				{images && images.length
 					? images.map((image) => {
 							return (
@@ -97,18 +93,15 @@ const PostForm = ({ addPost }) => {
 										onClick={() => {
 											handleDeleteImage(image.public_id);
 										}}
-										style={{ cursor: 'pointer' }}
-										id={image.public_id}>
-										<img
-											src={image.url}
-											alt=""
-											className="image-thumbnail"
-										/>
+										style={{ cursor: "pointer" }}
+										id={image.public_id}
+									>
+										<img src={image.url} alt="" className="image-thumbnail" />
 									</Badge>
 								</div>
 							);
 					  })
-					: ''}
+					: ""}
 				<div className="form-action  my-1">
 					<div className="image-upload">
 						<label htmlFor="file-input">
@@ -121,11 +114,7 @@ const PostForm = ({ addPost }) => {
 							onChange={handleimageResizeAndUpload}
 						/>
 					</div>
-					<input
-						type="submit"
-						className="btn btn-dark"
-						value="Submit"
-					/>
+					<input type="submit" className="btn btn-dark" value="Submit" />
 				</div>
 			</form>
 		</div>
