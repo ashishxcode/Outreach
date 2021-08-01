@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
-import { FiImage } from 'react-icons/fi';
-import Resizer from 'react-image-file-resizer';
-import api from '../../utils/api';
-import { Badge } from 'antd';
-import { AiOutlineDelete } from 'react-icons/ai';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addPost } from "../../actions/post";
+import { FiImage } from "react-icons/fi";
+import Resizer from "react-image-file-resizer";
+import api from "../../utils/api";
+import { Badge } from "antd";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const PostForm = ({ addPost }) => {
-	const [text, setText] = useState('');
+	const [text, setText] = useState("");
 	const [images, setImages] = useState([]);
 	const [imageURL, setImageURL] = useState();
 
@@ -27,28 +27,26 @@ const PostForm = ({ addPost }) => {
 					files[i],
 					200,
 					200,
-					'JPEG',
+					"JPEG",
 					100,
 					0,
 					(uri) => {
 						//the calback dunction : most important
-						console.log('uri ===> ', uri);
-						api.post('http://localhost:5000/api/imagesUpload/', {
-							image: uri,
-						})
+						console.log("uri ===> ", uri);
+						api
+							.post("http://localhost:5000/api/imagesUpload/", {
+								image: uri,
+							})
 							.then((res) => {
 								console.log(
-									'res from images ==>',
+									"res from images ==>",
 									res.data.url,
-									setImageURL(res.data.url),
+									setImageURL(res.data.url)
 								);
 
 								filesUploaded.push(res.data);
 								setImages(filesUploaded);
-								console.log(
-									'filesUploaded ===> ',
-									filesUploaded,
-								);
+								console.log("filesUploaded ===> ", filesUploaded);
 							})
 							.catch((err) => {
 								console.log(err.message);
@@ -56,14 +54,14 @@ const PostForm = ({ addPost }) => {
 
 						//make request to backend with images
 					},
-					'base64',
+					"base64"
 				);
 			}
 		}
 	};
 
 	const handleDeleteImage = (e) => {
-		console.log('delete click');
+		console.log("delete click");
 	};
 	return (
 		<div className="post-form">
@@ -72,8 +70,9 @@ const PostForm = ({ addPost }) => {
 				onSubmit={(e) => {
 					e.preventDefault();
 					addPost({ text });
-					setText('');
-				}}>
+					setText("");
+				}}
+			>
 				<textarea
 					name="text"
 					cols="30"
@@ -85,13 +84,12 @@ const PostForm = ({ addPost }) => {
 				/>
 				{imageURL && (
 					<Badge
-						count={<AiOutlineDelete style={{ color: '#f5222d' }} />}
-						onClick={handleDeleteImage}>
-						<img
-							src={imageURL}
-							className="image-thumbnail"
-							alt=""
-						/>
+						count="❌"
+						onClick={handleDeleteImage}
+						style={{ cursor: "pointer" }}
+						offset={[-2, 8]}
+					>
+						<img src={imageURL} className="image-thumbnail" alt="" />
 					</Badge>
 				)}
 				<div className="form-action  my-1">
@@ -106,11 +104,7 @@ const PostForm = ({ addPost }) => {
 							onChange={handleimageResizeAndUpload}
 						/>
 					</div>
-					<input
-						type="submit"
-						className="btn btn-dark"
-						value="Submit"
-					/>
+					<input type="submit" className="btn btn-dark" value="Submit" />
 				</div>
 			</form>
 		</div>
