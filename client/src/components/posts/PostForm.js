@@ -86,8 +86,8 @@ const PostForm = ({ addPost }) => {
 					<Badge
 						count="❌"
 						onClick={handleDeleteImage}
+						offset={[0, 10]}
 						style={{ cursor: "pointer" }}
-						offset={[-2, 8]}
 					>
 						<img src={imageURL} className="image-thumbnail" alt="" />
 					</Badge>
