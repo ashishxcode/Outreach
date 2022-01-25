@@ -4,9 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/ashishxcode/Outreach">
-    <img src="./raw/header.png" alt="Logo">
-  </a>
+  <a href="https://ibb.co/8xL0DTG"><img src="https://i.ibb.co/R6k9pZt/Outreach-cover.png" alt="Outreach Logo" border="0"></a>
   <hr>
   <p align="center">
    A MERN Stack Social Media App for Developer Community
@@ -44,13 +42,8 @@
 
 <!-- ABOUT THE PROJECT -->
 
-<span style="font-size:30px">🚧</span>
-
+<span style="font-size:30px">🚧</span> 
 # About The Project
-
-  <a href="https://github.com/ashishxcode/Outreach">
-    <img src="./raw/Outreach-demo.gif" alt="Logo">
-  </a>
 As a developer networking is matter. Why it's matter ?
 
 - We work in teams
